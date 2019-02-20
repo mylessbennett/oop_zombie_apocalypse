@@ -55,16 +55,23 @@ class Zombie:
       counter += 1
 
   def encounter(self):
-    """This instance method represents you coming across a zombie! This can end in two possible outcomes:
+    """This instance method represents you coming across a zombie! This can end in three possible outcomes:
     1. You outrun the zombie and escape unscathed!
-    2. You don't outrun the zombie. It eats your brains and you die. :(
+    2. You don't out run the zombie you fight and win, you become a zombie.
+    3. You don't outrun the zombie, you fight, you lose and it eats your brains and you die. :(
     Returns a summary of what happened."""
     outrun = self.chase()
+    win_fight = self.fight()
 
-    if outrun:
-      return 'You escaped!'
+    if not outrun:
+        win_fight = self.fight()
+        if  win_fight:
+            Zombie.horde.append(Zombie())
+            return 'You are now a zombie. Raawwwwrghh!'
+        else:
+            return 'You died.'
     else:
-      return 'You died.'
+        return 'Escaped!'
 
   def chase(self):
     """Represents you trying to outrun this particular zombie.
@@ -80,8 +87,9 @@ class Zombie:
     return your_strength > self.strength
 
 
-# Testing 
-# zombie = Zombie(3,4)
+# Testing
+zombie = Zombie(3,4)
 # print(zombie.speed)
 # print(zombie.strength
 # print(zombie.fight())
+# print(zombie.encounter())

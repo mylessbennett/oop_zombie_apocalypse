@@ -6,13 +6,20 @@ class Zombie:
   horde = []
   plague_level = 10
   default_speed = 1
+  max_strength = 8
+  default_strength = 3
 
-  def __init__(self, speed):
-    """Initializes zombie's speed"""
+  def __init__(self, speed, strength):
+    """Initializes zombie's speed and strength"""
     if speed > Zombie.max_speed:
       self.speed = Zombie.default_speed
     else:
       self.speed = speed
+
+    if strength > Zombie.max_strength:
+      self.strength = Zombie.default_strength
+    else:
+      self.strength = strength
 
   def __str__(self):
       return "Zombie has speed {}".format(self.speed)
@@ -65,4 +72,7 @@ class Zombie:
     your_speed = random.randint(1, Zombie.max_speed)
     return your_speed > self.speed
 
-print(Zombie(5))
+
+# zombie = Zombie(3,4)
+# print(zombie.speed)
+# print(zombie.strength)

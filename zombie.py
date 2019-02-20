@@ -73,6 +73,15 @@ class Zombie:
     return your_speed > self.speed
 
 
+  def fight(self):
+    """Represents you trying to fight this particular zombie. Uses 'Zombie.max_strength' to generate a random number that represents how well you are able to fight it off."""
+
+    your_strength = random.randint(1, Zombie.max_strength)
+    return your_strength > self.strength
+
+
+# Testing 
 # zombie = Zombie(3,4)
 # print(zombie.speed)
-# print(zombie.strength)
+# print(zombie.strength
+# print(zombie.fight())

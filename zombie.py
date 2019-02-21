@@ -22,7 +22,7 @@ class Zombie:
       self.strength = strength
 
   def __str__(self):
-      return "Zombie has speed {}".format(self.speed)
+      return "Zombie speed: {} strength: {}".format(self.speed, self.strength)
 
   @classmethod
   def spawn(cls):
@@ -33,7 +33,8 @@ class Zombie:
 
     while count < new_zombies:
       speed = random.randint(1, Zombie.max_speed)
-      Zombie.horde.append(Zombie(speed))
+      strength = random.randint(1, Zombie.max_strength)
+      Zombie.horde.append(Zombie(speed, strength))
       count += 1
 
   @classmethod
@@ -43,6 +44,7 @@ class Zombie:
     and sometimes the zombie plague level increases."""
     Zombie.spawn()
     Zombie.some_die_off()
+    Zombie.increase_plague_level()
 
   @classmethod
   def some_die_off(cls):
@@ -53,6 +55,11 @@ class Zombie:
       random_zombie = random.randint(0,len(Zombie.horde) - 1)
       Zombie.horde.pop(random_zombie)
       counter += 1
+
+  @classmethod
+  def increase_plague_level(cls):
+      """ Increases the plague level by a random number (between 0 and 2)"""
+      Zombie.plague_level += random.randint(0,2)
 
   def encounter(self):
     """This instance method represents you coming across a zombie! This can end in three possible outcomes:
@@ -88,8 +95,17 @@ class Zombie:
 
 
 # Testing
-zombie = Zombie(3,4)
-# print(zombie.speed)
-# print(zombie.strength
-# print(zombie.fight())
-# print(zombie.encounter())
+print(Zombie.horde)
+Zombie.new_day()
+print(Zombie.horde)
+zombie1 = Zombie.horde[0]
+print(zombie1)
+zombie2 = Zombie.horde[1]
+print(zombie2)
+print(zombie1.encounter())
+print(zombie2.encounter())
+Zombie.new_day()
+zombie1 = Zombie.horde[0]
+zombie2 = Zombie.horde[1]
+print(zombie1.encounter())
+print(zombie2.encounter())
